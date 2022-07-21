@@ -1,0 +1,10 @@
+export 'package:proyecto_final_seminario/app/widgets/email_input.dart';
+export 'package:proyecto_final_seminario/app/widgets/normal_input.dart';
+export 'package:proyecto_final_seminario/app/widgets/password_input.dart';
+export 'package:proyecto_final_seminario/app/widgets/product_card.dart';
+export 'package:proyecto_final_seminario/app/widgets/purple_button.dart';
+export 'package:proyecto_final_seminario/app/widgets/purple_outlined_button.dart';
+export 'package:proyecto_final_seminario/app/widgets/simple_alert.dart';
+export 'package:proyecto_final_seminario/app/widgets/snackbars.dart';
+export 'package:proyecto_final_seminario/app/widgets/yellow_button.dart';
+export 'package:proyecto_final_seminario/app/widgets/yellow_outlined_button.dart';
