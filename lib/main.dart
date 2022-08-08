@@ -2,11 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:proyecto_final_seminario/app/services/services.dart';
 import 'package:proyecto_final_seminario/app/utils/utils.dart';
 import 'app/routes/app_pages.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+ WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   await Firebase.initializeApp();
   // await PushNotificationService.initNotifications();
@@ -17,26 +18,21 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   final box = GetStorage();
-
   String? _setInitialRoute() {
-    // var firebaseUser = auth.getCurrentUser();
-    return AppPages.INITIAL;
+    var firebaseUser = auth.getCurrentUser();
+    if (firebaseUser != null) {
+      return Routes.HOME;
+    } else if (box.read("isTourShowed") ?? false) {
+      return Routes.LOGIN;
+    } else {
+      return Routes.TOUR;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      // localizationsDelegates: const [
-      // GlobalMaterialLocalizations.delegate,
-      // GlobalCupertinoLocalizations.delegate,
-      // GlobalWidgetsLocalizations.delegate,
-      // ],
-      // supportedLocales: const [
-      //   Locale('es', ''), // Spanish, no country code
-      // ],
       useInheritedMediaQuery: true,
-      // locale: DevicePreview.locale(context),
-      // builder: DevicePreview.appBuilder,
       title: "Application",
       initialRoute: _setInitialRoute(),
       getPages: AppPages.routes,
