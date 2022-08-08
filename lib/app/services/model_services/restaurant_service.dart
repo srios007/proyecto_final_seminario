@@ -1,28 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:proyecto_final_seminario/app/services/services.dart';
-import 'package:proyecto_final_seminario/app/utils/utils.dart';
-import '../../models/models.dart';
-import '../../models/user_model.dart';
+import '../../models/restaurant_model.dart';
+import '../../utils/references.dart';
 import '../firebase_services/database_service.dart';
 
-class UserService {
+class RestaurantService {
   static String restaurantsReference = firebaseReferences.restaurants;
   static String addressReference = firebaseReferences.addresses;
 
-  static final UserService _instance = UserService._internal();
+  static final RestaurantService _instance = RestaurantService._internal();
 
-  factory UserService() {
+  factory RestaurantService() {
     return _instance;
   }
 
-  UserService._internal();
+  RestaurantService._internal();
   var firestore = FirebaseFirestore.instance;
 
   //Para paginacion
   DocumentSnapshot? lastDocument;
 
   Future<bool> save({
-    required User restaurant,
+    required Restaurant restaurant,
     required String customId,
   }) async {
     try {
@@ -36,22 +36,22 @@ class UserService {
 
       return true;
     } on Exception catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       return false;
     }
   }
 
-  Future<bool> delete(User user) async {
+  Future<bool> delete(Restaurant user) async {
     try {
       await database.deleteDocument(user.id, restaurantsReference);
       return true;
     } on Exception catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       return false;
     }
   }
 
-  Future<bool> update(User user) async {
+  Future<bool> update(Restaurant user) async {
     try {
       DocumentReference docRef = database.getDocumentReference(
         collection: restaurantsReference,
@@ -61,12 +61,12 @@ class UserService {
       await docRef.update(user.toJson());
       return true;
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       return false;
     }
   }
 
-  Future<User?> getUserDocumentById(
+  Future<Restaurant?> getUserDocumentById(
     String documentId,
   ) async {
     print(documentId);
@@ -77,12 +77,12 @@ class UserService {
 
     if (!querySnapshot.exists) return null;
 
-    return User.fromJson(
+    return Restaurant.fromJson(
       querySnapshot.data() as Map<String, dynamic>,
     );
   }
 
-  Future<User?> getUserDocumentByPhoneNumber(
+  Future<Restaurant?> getUserDocumentByPhoneNumber(
     String phoneNumber,
   ) async {
     dynamic userJson;
@@ -96,14 +96,14 @@ class UserService {
     for (var user in querySnapshot.docs) {
       userJson = user.data();
     }
-    return User.fromJson(
+    return Restaurant.fromJson(
       userJson as Map<String, dynamic>,
     );
   }
 
-  Future<User?> getCurrentUser() async {
+  Future<Restaurant?> getCurrentUser() async {
     var currentFirebaseUser = auth.getCurrentUser();
-    print('UID: ${currentFirebaseUser!.uid}');
+    debugPrint('UID: ${currentFirebaseUser!.uid}');
     var user = await getUserDocumentById(
       currentFirebaseUser.uid,
     );
@@ -111,4 +111,4 @@ class UserService {
   }
 }
 
-UserService userService = UserService();
+RestaurantService restaurantService = RestaurantService();

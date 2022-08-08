@@ -5,11 +5,16 @@ import 'package:proyecto_final_seminario/app/utils/utils.dart';
 final currencyFormat = NumberFormat.currency(symbol: "\$", decimalDigits: 0);
 final requestFormat =
     NumberFormat.currency(symbol: "", decimalDigits: 0, locale: "es_ES");
-
 class Styles {
   TextStyle tittleRegister = const TextStyle(
     color: Palette.darkBlue,
     fontSize: 24.0,
+    fontWeight: FontWeight.bold,
+  );
+
+  TextStyle tittleDrawer = const TextStyle(
+    color: Palette.white,
+    fontSize: 32.0,
     fontWeight: FontWeight.bold,
   );
 
@@ -33,6 +38,11 @@ class Styles {
   TextStyle hintTextStyleRegister = const TextStyle(
     color: Palette.darkBlue,
     fontSize: 18,
+    fontWeight: FontWeight.w300,
+  );
+  TextStyle profileLabelStyle = const TextStyle(
+    color: Palette.darkBlue,
+    fontSize: 15,
     fontWeight: FontWeight.w300,
   );
   TextStyle errorStyle = const TextStyle(
@@ -74,6 +84,12 @@ class Styles {
   TextStyle titleOffer = const TextStyle(
     fontWeight: FontWeight.w700,
     fontSize: 24,
+    color: Palette.darkBlue,
+  );
+
+  TextStyle nameProfile = const TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 20,
     color: Palette.darkBlue,
   );
   TextStyle titleOfferCard = const TextStyle(
