@@ -1,19 +1,19 @@
- 
-import '../../../models/restaurant_model.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
+import 'package:proyecto_final_seminario/app/services/services.dart';
 
-import '../../../routes/app_pages.dart';
-import '../../../services/firebase_services/auth_service.dart';
 import '../../../services/model_services/restaurant_service.dart';
+import '../../../services/firebase_services/auth_service.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../../widgets/snackbars.dart';
+import '../../../routes/app_pages.dart';
+import 'package:flutter/widgets.dart';
+import '../../../models/models.dart';
+import 'package:get/get.dart';
 
 class LoginController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final formKeyLogin = GlobalKey<FormState>();
-  Restaurant restaurant = Restaurant();
+  User? user = User();
   final visiblePassword = false.obs;
   RxBool isLoading = false.obs;
   final box = GetStorage();
@@ -42,10 +42,15 @@ class LoginController extends GetxController {
             email: emailController.text.trim(),
             password: passwordController.text);
         if (response is! String) {
-          restaurant = (await restaurantService.getCurrentUser())!;
-          restaurantService.update(restaurant);
-          isLoading.value = false;
-          Get.offAllNamed(Routes.HOME, arguments: {'user': restaurant});
+          user = (await userService.getCurrentUser())!;
+          if (user != null) {
+            userService.update(user!);
+            isLoading.value = false;
+            Get.offAllNamed(Routes.HOME, arguments: {'user': user});
+          } else {
+            SnackBars.showErrorSnackBar(
+                'No eres un restaurante, prueba con otra cuenta');
+          }
         } else {
           SnackBars.showErrorSnackBar(response);
           isLoading.value = false;

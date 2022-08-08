@@ -6,7 +6,7 @@ import '../../models/user_model.dart';
 import '../firebase_services/database_service.dart';
 
 class UserService {
-  static String restaurantsReference = firebaseReferences.restaurants;
+  static String restaurantsReference = firebaseReferences.clients;
   static String addressReference = firebaseReferences.addresses;
 
   static final UserService _instance = UserService._internal();

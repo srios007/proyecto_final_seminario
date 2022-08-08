@@ -25,10 +25,10 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => const HomeView(),
+      page: () => HomeView(),
       binding: HomeBinding(),
     ),
-     GetPage(
+    GetPage(
       name: _Paths.REGISTER,
       page: () => RegisterView(),
       binding: RegisterBinding(),
@@ -58,6 +58,5 @@ class AppPages {
       page: () => ProfileView(),
       binding: ProfileBinding(),
     ),
-  
   ];
 }
