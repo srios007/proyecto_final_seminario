@@ -1,12 +1,10 @@
-import 'package:proyecto_final_seminario/app/models/user_model.dart';
 import 'package:proyecto_final_seminario/app/services/model_services/category_service.dart';
 import 'package:proyecto_final_seminario/app/services/model_services/meal_service.dart';
 import 'package:proyecto_final_seminario/app/models/category_model.dart';
 import 'package:proyecto_final_seminario/app/models/meal_model.dart';
-import 'package:get/get.dart';
 import 'package:proyecto_final_seminario/app/services/services.dart';
-
-import '../../../services/model_services/restaurant_service.dart';
+import 'package:proyecto_final_seminario/app/models/user_model.dart';
+import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   User user = User();
@@ -23,7 +21,7 @@ class HomeController extends GetxController {
     isLoading.value = true;
     await getRestaurant();
     await getCategories();
-    // await getMeals();
+    await getMeals();
     isLoading.value = false;
   }
 
@@ -39,11 +37,7 @@ class HomeController extends GetxController {
 
   // Trae los platillos
   getMeals() async {
-    meals = await mealService.getMeals(
-      user.id!,
-      'meals',
-      'restaurantId',
-    );
+    meals = await mealService.getMeals('meals');
   }
 
   //Ir a crear menú
