@@ -6,7 +6,7 @@ import '../../models/user_model.dart';
 import '../firebase_services/database_service.dart';
 
 class UserService {
-  static String restaurantsReference = firebaseReferences.clients;
+  static String userReference = firebaseReferences.clients;
   static String addressReference = firebaseReferences.addresses;
 
   static final UserService _instance = UserService._internal();
@@ -21,16 +21,16 @@ class UserService {
   //Para paginacion
   DocumentSnapshot? lastDocument;
 
-  Future<bool> save({
-    required User restaurant,
+  Future<bool> saveUser({
+    required User user,
     required String customId,
   }) async {
     try {
-      restaurant.created = DateTime.now();
+      user.created = DateTime.now();
 
       await database.saveUserWithCustomIdAndSubcollection(
-        restaurant.toJson(),
-        restaurantsReference,
+        user.toJson(),
+        userReference,
         customId,
       );
 
@@ -43,7 +43,7 @@ class UserService {
 
   Future<bool> delete(User user) async {
     try {
-      await database.deleteDocument(user.id, restaurantsReference);
+      await database.deleteDocument(user.id, userReference);
       return true;
     } on Exception catch (e) {
       print(e.toString());
@@ -54,7 +54,7 @@ class UserService {
   Future<bool> update(User user) async {
     try {
       DocumentReference docRef = database.getDocumentReference(
-        collection: restaurantsReference,
+        collection: userReference,
         documentId: user.id!,
       );
 
@@ -69,17 +69,24 @@ class UserService {
   Future<User?> getUserDocumentById(
     String documentId,
   ) async {
-    print(documentId);
-    var querySnapshot = await database.getDocument(
-      collection: 'restaurants',
-      documentId: documentId,
-    );
+    try {
+      print(documentId);
+      var querySnapshot = await database.getDocument(
+        collection: 'clients',
+        documentId: documentId,
+      );
 
-    if (!querySnapshot.exists) return null;
+      if (!querySnapshot.exists) {
+        await auth.signOut();
+        return User();
+      }
 
-    return User.fromJson(
-      querySnapshot.data() as Map<String, dynamic>,
-    );
+      return User.fromJson(
+        querySnapshot.data() as Map<String, dynamic>,
+      );
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<User?> getUserDocumentByPhoneNumber(
@@ -102,12 +109,20 @@ class UserService {
   }
 
   Future<User?> getCurrentUser() async {
-    var currentFirebaseUser = auth.getCurrentUser();
-    print('UID: ${currentFirebaseUser!.uid}');
-    var user = await getUserDocumentById(
-      currentFirebaseUser.uid,
-    );
-    return user;
+    try {
+      var currentFirebaseUser = auth.getCurrentUser();
+      print('UID: ${currentFirebaseUser!.uid}');
+      var user = await getUserDocumentById(
+        currentFirebaseUser.uid,
+      );
+      if (user == null) {
+        return User();
+      } else {
+        return user;
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 }
 

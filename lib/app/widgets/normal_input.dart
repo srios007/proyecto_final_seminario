@@ -69,7 +69,7 @@ class NormalInput extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           Container(
-            width: Get.width - 81,
+            width: Get.width - 100,
             child: TextFormField(
               obscureText: obscureText,
               textCapitalization: textCapitalization ?? TextCapitalization.none,

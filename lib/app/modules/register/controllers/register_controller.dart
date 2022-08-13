@@ -5,16 +5,15 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:proyecto_final_seminario/app/models/models.dart';
 import 'package:proyecto_final_seminario/app/services/services.dart';
 
-import '../../../models/restaurant_model.dart';
 import '../../../routes/app_pages.dart';
 import '../../../services/model_services/restaurant_service.dart';
 import '../../../widgets/snackbars.dart';
 
 class RegisterController extends GetxController {
-  final TextEditingController restaurantNameController =
-      TextEditingController();
+  final TextEditingController userNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
@@ -22,7 +21,7 @@ class RegisterController extends GetxController {
   final ImagePicker _picker = ImagePicker();
   PhoneNumber phoneNumber = PhoneNumber(code: 'CO', dialingCode: '+57');
   ContactInfo contactInfo = ContactInfo();
-  Restaurant restaurant = Restaurant();
+  User user = User();
   final visiblePassword = false.obs;
   RxBool isLoadingPP = false.obs;
   RxBool isLoading = false.obs;
@@ -103,14 +102,14 @@ class RegisterController extends GetxController {
         'Por favor, rellena todos los campos.',
       );
     } else {
-      restaurant.restaurantName = restaurantNameController.text;
+      contactInfo.fullName = userNameController.text;
       contactInfo.email = emailController.text.trim();
       phoneNumber.basePhoneNumber = phoneController.text.trim();
       contactInfo.phoneNumber = phoneNumber;
-      restaurant.contactInfo = contactInfo;
-      restaurant.bankAccount = BankAccount(ownerInfo: OwnerInfo());
-      restaurant.address = Address();
-      restaurant.userType = 'Restaurant';
+      user.contactInfo = contactInfo;
+      user.bankAccount = BankAccount(ownerInfo: OwnerInfo());
+      user.address = Address();
+      user.userType = 'Client';
       try {
         isLoading.value = true;
         var signUpResult = await auth.signUp(
@@ -134,13 +133,13 @@ class RegisterController extends GetxController {
               'FotoPerfil',
               profilePicture!,
             );
-            restaurant.profilePictureUrl = urlRutResult;
+            user.profilePictureUrl = urlRutResult;
           } else {
-            restaurant.profilePictureUrl = '';
+            user.profilePictureUrl = '';
           }
-          restaurant.id = signUpResult.user.uid;
-          await restaurantService.save(
-            restaurant: restaurant,
+          user.id = signUpResult.user.uid;
+          await userService.saveUser(
+            user: user,
             customId: signUpResult.user.uid,
           );
           Get.offAllNamed(Routes.HOME);

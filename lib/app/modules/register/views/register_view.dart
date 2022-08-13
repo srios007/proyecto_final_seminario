@@ -112,8 +112,8 @@ class RegisterView extends GetView<RegisterController> {
                   const Spacer(flex: 2),
                   NormalInput(
                     isRequired: false,
-                    hintText: 'Nombre del restaurante',
-                    textEditingController: controller.restaurantNameController,
+                    hintText: 'Nombre completo',
+                    textEditingController: controller.userNameController,
                   ),
                   const SizedBox(height: 20),
                   _PhoneNumberInput(controller: controller),

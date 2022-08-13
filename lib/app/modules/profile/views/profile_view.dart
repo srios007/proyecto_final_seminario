@@ -28,45 +28,44 @@ class ProfileView extends GetView<ProfileController> {
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                 ),
-                child:
-                    controller.homeController.restaurant.profilePictureUrl != ''
-                        ? ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: CachedNetworkImage(
-                              fit: BoxFit.fill,
-                              imageUrl: controller
-                                  .homeController.restaurant.profilePictureUrl!,
-                              progressIndicatorBuilder:
-                                  (context, url, downloadProgress) => Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: CircularProgressIndicator(
-                                  value: downloadProgress.progress,
-                                ),
-                              ),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                            ),
-                          )
-                        : Container(
-                            height: 150,
-                            width: 150,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                width: 2,
-                              ),
-                            ),
-                            child: const Center(
-                              child: Icon(
-                                Icons.person,
-                                size: 80,
-                              ),
+                child: controller.homeController.user.profilePictureUrl != ''
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: CachedNetworkImage(
+                          fit: BoxFit.fill,
+                          imageUrl:
+                              controller.homeController.user.profilePictureUrl!,
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) => Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: CircularProgressIndicator(
+                              value: downloadProgress.progress,
                             ),
                           ),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
+                      )
+                    : Container(
+                        height: 150,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            width: 2,
+                          ),
+                        ),
+                        child: const Center(
+                          child: Icon(
+                            Icons.person,
+                            size: 80,
+                          ),
+                        ),
+                      ),
               ),
               const SizedBox(height: 20),
               Text(
-                controller.homeController.restaurant.restaurantName!,
+                controller.homeController.user.contactInfo!.fullName!,
                 style: styles.nameProfile,
               ),
               const SizedBox(height: 50),
@@ -82,7 +81,7 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      controller.homeController.restaurant.contactInfo!.email!,
+                      controller.homeController.user.contactInfo!.email!,
                       style: styles.profileLabelStyle,
                     ),
                     const SizedBox(height: 20),
@@ -92,7 +91,7 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      '${controller.homeController.restaurant.contactInfo!.phoneNumber!.dialingCode!} ${controller.homeController.restaurant.contactInfo!.phoneNumber!.basePhoneNumber!}',
+                      '${controller.homeController.user.contactInfo!.phoneNumber!.dialingCode!} ${controller.homeController.user.contactInfo!.phoneNumber!.basePhoneNumber!}',
                       style: styles.profileLabelStyle,
                     ),
                   ],

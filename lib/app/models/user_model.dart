@@ -7,7 +7,6 @@ class User {
   ContactInfo? contactInfo;
   String? userType;
   String? password;
-  String? restaurantName;
   BankAccount? bankAccount;
   Address? address;
 
@@ -18,7 +17,6 @@ class User {
     this.contactInfo,
     this.userType,
     this.password,
-    this.restaurantName,
     this.bankAccount,
     this.address,
   });
@@ -31,7 +29,6 @@ class User {
         ? ContactInfo?.fromJson(json['contactInfo'])
         : null;
     userType = json['userType'];
-    restaurantName = json['restaurantName'];
     address = json['addresses'] != null
         ? Address.fromJson(
             json['addresses'],
@@ -53,7 +50,6 @@ class User {
       data['contactInfo'] = contactInfo?.toJson();
     }
     data['userType'] = userType;
-    data['restaurantName'] = restaurantName;
     if (address != null) {
       data['address'] = address?.toJson();
     }
@@ -68,7 +64,6 @@ class ContactInfo {
   String? email;
   String? fullName;
   PhoneNumber? phoneNumber;
-
 
   ContactInfo({
     this.email,

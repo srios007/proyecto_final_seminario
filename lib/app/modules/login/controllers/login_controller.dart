@@ -13,10 +13,10 @@ class LoginController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final formKeyLogin = GlobalKey<FormState>();
-  User? user = User();
   final visiblePassword = false.obs;
   RxBool isLoading = false.obs;
   final box = GetStorage();
+  User? user = User();
 
   showPassword() {
     visiblePassword.value
@@ -43,13 +43,15 @@ class LoginController extends GetxController {
             password: passwordController.text);
         if (response is! String) {
           user = (await userService.getCurrentUser())!;
-          if (user != null) {
-            userService.update(user!);
+          if (user!.id != null) {
             isLoading.value = false;
             Get.offAllNamed(Routes.HOME, arguments: {'user': user});
           } else {
+            print('2');
+            isLoading.value = false;
             SnackBars.showErrorSnackBar(
-                'No eres un restaurante, prueba con otra cuenta');
+              'No eres un restaurante, prueba con otra cuenta',
+            );
           }
         } else {
           SnackBars.showErrorSnackBar(response);
@@ -57,6 +59,7 @@ class LoginController extends GetxController {
         }
       } catch (e) {
         print(e.toString());
+        isLoading.value = false;
       }
     }
   }

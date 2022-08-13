@@ -34,7 +34,7 @@ class HomeView extends GetView<HomeController> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Text(
-                            'Bienvenido ${controller.restaurant.restaurantName}',
+                            'Bienvenido ${controller.user.contactInfo!.fullName}',
                             style: styles.titleOffer,
                             textAlign: TextAlign.center,
                           ),
