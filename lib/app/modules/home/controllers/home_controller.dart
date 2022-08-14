@@ -1,3 +1,4 @@
+import 'package:proyecto_final_seminario/app/routes/app_pages.dart';
 import 'package:proyecto_final_seminario/app/services/model_services/category_service.dart';
 import 'package:proyecto_final_seminario/app/services/model_services/meal_service.dart';
 import 'package:proyecto_final_seminario/app/models/category_model.dart';
@@ -40,6 +41,33 @@ class HomeController extends GetxController {
     meals = await mealService.getMeals('meals');
   }
 
-  //Ir a crear menú
-  goToAddMenu() async {}
+  //Ir ald etalle de la categoría
+  goToCategoryDetail(Category category) async {
+    Get.toNamed(Routes.CATEGORY_DETAIL, arguments: {
+      'category': category,
+    });
+  }
+
+  // Categoría a partir de un category id
+  setCategory(String categoryId) {
+    switch (categoryId) {
+      case 'beverage':
+        return 'Bebida';
+
+      case 'dessert':
+        return 'Postre';
+
+      case 'entree':
+        return 'Plato fuerte';
+
+      case 'side':
+        return 'Acompañamiento';
+
+      case 'starter':
+        return 'Entrada';
+
+      default:
+        return '';
+    }
+  }
 }

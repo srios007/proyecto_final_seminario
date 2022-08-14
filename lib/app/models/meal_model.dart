@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
@@ -16,6 +18,9 @@ class Meal {
   TextEditingController? descriptionController;
   TextEditingController? priceController;
   TextEditingController? amountController;
+  File? picture;
+  String? pictureUrl;
+  RxBool? isLoading = false.obs;
 
   Meal({
     this.id,
@@ -31,6 +36,9 @@ class Meal {
     this.descriptionController,
     this.priceController,
     this.amountController,
+    this.picture,
+    this.pictureUrl,
+    this.isLoading,
   });
 
   Meal.fromJson(Map<String, dynamic> json) {
@@ -43,6 +51,7 @@ class Meal {
     price = json['price'];
     isAvaliable = json['isAvaliable'];
     amount = json['amount'];
+    pictureUrl = json['pictureUrl'];
   }
 
   Map<String, dynamic> toJson() {
@@ -56,6 +65,7 @@ class Meal {
     data['price'] = price;
     data['isAvaliable'] = isAvaliable;
     data['amount'] = amount;
+    data['pictureUrl'] = pictureUrl;
     return data;
   }
 }
