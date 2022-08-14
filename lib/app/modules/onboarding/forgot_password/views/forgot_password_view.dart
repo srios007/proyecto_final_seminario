@@ -1,11 +1,12 @@
-import 'package:flutter/material.dart';
 
+import '../controllers/forgot_password_controller.dart';
+import '../../../../widgets/purple_button.dart';
+import '../../../../widgets/email_input.dart';
+import '../../../../utils/palette.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../utils/palette.dart';
-import '../../../widgets/email_input.dart';
-import '../../../widgets/purple_button.dart';
-import '../controllers/forgot_password_controller.dart';
+
 
 class ForgotPasswordView extends GetView<ForgotPasswordController> {
   @override

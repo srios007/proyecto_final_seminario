@@ -1,21 +1,21 @@
 import 'package:get/get.dart';
 
-import '../modules/category_detail/bindings/category_detail_binding.dart';
-import '../modules/category_detail/views/category_detail_view.dart';
-import '../modules/forgot_password/bindings/forgot_password_binding.dart';
-import '../modules/forgot_password/views/forgot_password_view.dart';
-import '../modules/forgot_user/bindings/forgot_user_binding.dart';
-import '../modules/forgot_user/views/forgot_user_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/login/bindings/login_binding.dart';
-import '../modules/login/views/login_view.dart';
 import '../modules/meal_detail/bindings/meal_detail_binding.dart';
 import '../modules/meal_detail/views/meal_detail_view.dart';
+import '../modules/onboarding/forgot_password/bindings/forgot_password_binding.dart';
+import '../modules/onboarding/forgot_password/views/forgot_password_view.dart';
+import '../modules/onboarding/forgot_user/bindings/forgot_user_binding.dart';
+import '../modules/onboarding/forgot_user/views/forgot_user_view.dart';
+import '../modules/onboarding/login/bindings/login_binding.dart';
+import '../modules/onboarding/login/views/login_view.dart';
+import '../modules/onboarding/register/bindings/register_binding.dart';
+import '../modules/onboarding/register/views/register_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
-import '../modules/register/bindings/register_binding.dart';
-import '../modules/register/views/register_view.dart';
+import '../modules/request/category_detail/bindings/category_detail_binding.dart';
+import '../modules/request/category_detail/views/category_detail_view.dart';
 import '../modules/tour/bindings/tour_binding.dart';
 import '../modules/tour/views/tour_view.dart';
 

@@ -1,12 +1,9 @@
 import 'package:proyecto_final_seminario/app/services/services.dart';
-
-import '../../../services/model_services/restaurant_service.dart';
-import '../../../services/firebase_services/auth_service.dart';
 import 'package:get_storage/get_storage.dart';
-import '../../../widgets/snackbars.dart';
-import '../../../routes/app_pages.dart';
+import '../../../../widgets/snackbars.dart';
+import '../../../../routes/app_pages.dart';
+import '../../../../models/models.dart';
 import 'package:flutter/widgets.dart';
-import '../../../models/models.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {

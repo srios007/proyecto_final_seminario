@@ -1,10 +1,10 @@
+import 'package:proyecto_final_seminario/app/services/services.dart';
+import '../views/forgot_password_detail_view.dart'; 
+import '../../../../widgets/snackbars.dart';
+import '../../../../routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:proyecto_final_seminario/app/services/services.dart';
 
-import '../../../routes/app_pages.dart';
-import '../../../widgets/snackbars.dart';
-import '../views/forgot_password_detail_view.dart'; 
 
 class ForgotPasswordController extends GetxController {
  final TextEditingController emailController = TextEditingController();

@@ -1,8 +1,8 @@
+import '../controllers/forgot_password_controller.dart';
+import '../../../../utils/palette.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../utils/palette.dart';
-import '../controllers/forgot_password_controller.dart';
 
 class ForgotPasswordDetailView extends GetView {
   @override

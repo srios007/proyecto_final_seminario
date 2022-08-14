@@ -1,12 +1,12 @@
+import 'package:proyecto_final_seminario/app/utils/utils.dart';
 import 'package:country_code_picker/country_code_picker.dart';
+import '../controllers/register_controller.dart';
+import '../../../../widgets/purple_button.dart';
+import '../../../../widgets/normal_input.dart';
+import '../../../../widgets/email_input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:proyecto_final_seminario/app/utils/utils.dart';
-
-import '../../../widgets/widgets.dart';
-import '../controllers/register_controller.dart';
 
 class RegisterView extends GetView<RegisterController> {
   @override

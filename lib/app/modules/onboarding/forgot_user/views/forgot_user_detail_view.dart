@@ -1,6 +1,6 @@
-import '../../../utils/palette.dart';
 import '../controllers/forgot_user_controller.dart';
 import 'package:flutter/cupertino.dart';
+import '../../../../utils/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

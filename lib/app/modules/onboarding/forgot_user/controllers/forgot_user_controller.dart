@@ -1,10 +1,10 @@
-import 'package:proyecto_final_seminario/app/modules/forgot_user/views/forgot_user_detail_view.dart';
+import '../../../../services/model_services/restaurant_service.dart';
 import 'package:proyecto_final_seminario/app/widgets/widgets.dart';
+import '../views/forgot_user_detail_view.dart';
+import '../../../../routes/app_pages.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-import '../../../routes/app_pages.dart';
-import '../../../services/model_services/restaurant_service.dart';
 
 class ForgotUserController extends GetxController {
  final TextEditingController phoneController = TextEditingController();

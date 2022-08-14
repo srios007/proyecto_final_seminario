@@ -1,11 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
 import 'package:proyecto_final_seminario/app/utils/utils.dart';
-
-import '../../../models/meal_model.dart';
 import '../controllers/category_detail_controller.dart';
+import '../../../../models/meal_model.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 
 class CategoryDetailView extends GetView<CategoryDetailController> {
   const CategoryDetailView({Key? key}) : super(key: key);

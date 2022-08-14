@@ -1,8 +1,8 @@
  
 import 'package:country_code_picker/country_code_picker.dart';
-import '../../../utils/palette.dart';
-import '../../../widgets/purple_button.dart';
 import '../controllers/forgot_user_controller.dart';
+import '../../../../widgets/purple_button.dart';
+import '../../../../utils/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

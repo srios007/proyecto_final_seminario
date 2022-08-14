@@ -1,7 +1,8 @@
 import 'package:proyecto_final_seminario/app/services/model_services/meal_service.dart';
 import 'package:proyecto_final_seminario/app/models/category_model.dart';
-import '../../../models/meal_model.dart';
+import '../../../../models/meal_model.dart';
 import 'package:get/get.dart';
+
 
 class CategoryDetailController extends GetxController {
   late Category category;

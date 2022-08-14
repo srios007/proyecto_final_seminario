@@ -1,9 +1,10 @@
-import 'package:proyecto_final_seminario/app/modules/login/controllers/login_controller.dart';
 import 'package:proyecto_final_seminario/app/widgets/widgets.dart';
 import 'package:proyecto_final_seminario/app/utils/utils.dart';
+import '../controllers/login_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 
 class LoginView extends GetView<LoginController> {
   @override

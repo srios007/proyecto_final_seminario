@@ -1,16 +1,18 @@
-import 'dart:io';
 
-import 'package:image_picker/image_picker.dart';
+
+import 'package:proyecto_final_seminario/app/services/services.dart';
+import 'package:proyecto_final_seminario/app/models/models.dart';
 import 'package:permission_handler/permission_handler.dart';
+ import 'package:image_picker/image_picker.dart';
 import 'package:get_storage/get_storage.dart';
+import '../../../../widgets/snackbars.dart';
+import '../../../../routes/app_pages.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:proyecto_final_seminario/app/models/models.dart';
-import 'package:proyecto_final_seminario/app/services/services.dart';
+import 'dart:io';
 
-import '../../../routes/app_pages.dart';
-import '../../../services/model_services/restaurant_service.dart';
-import '../../../widgets/snackbars.dart';
+
+
 
 class RegisterController extends GetxController {
   final TextEditingController userNameController = TextEditingController();
