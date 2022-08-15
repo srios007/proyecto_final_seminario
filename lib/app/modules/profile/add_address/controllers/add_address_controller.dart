@@ -173,9 +173,9 @@ class AddAddressController extends GetxController {
       );
       homeController.user.address = address;
       userService.update(homeController.user);
-      isLoadingBtn.value = false;
-
       Get.back();
+
+      isLoadingBtn.value = false;
     } else {
       SnackBars.showErrorSnackBar('Por favor, llena los datos');
     }

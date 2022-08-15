@@ -29,9 +29,9 @@ class User {
         ? ContactInfo?.fromJson(json['contactInfo'])
         : null;
     userType = json['userType'];
-    address = json['addresses'] != null
+    address = json['address'] != null
         ? Address.fromJson(
-            json['addresses'],
+            json['address'],
           )
         : null;
     creditCard = json['creditCard'] != null
