@@ -31,17 +31,17 @@ class HomeController extends GetxController {
     isLoading.value = false;
   }
 
-  // Trae el usuario que inicia sesión
+  /// Trae el usuario que inicia sesión
   getRestaurant() async {
     user = (await userService.getCurrentUser())!;
   }
 
-  // Trae las categorías
+  /// Trae las categorías
   getCategories() async {
     categories = await categoryService.getCategories();
   }
 
-  // Trae los platillos
+  /// Trae los platillos
   getMeals() async {
     meals = await mealService.getMeals('meals');
   }
@@ -65,7 +65,7 @@ class HomeController extends GetxController {
     });
   }
 
-  // Categoría a partir de un category id
+  /// Categoría a partir de un category id
   setCategory(String categoryId) {
     switch (categoryId) {
       case 'beverage':

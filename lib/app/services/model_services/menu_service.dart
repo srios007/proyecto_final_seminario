@@ -18,10 +18,26 @@ class MenuService {
   MenuService._internal();
   var firestore = FirebaseFirestore.instance;
 
-  Future<List<Menu>> getMenus() async {
+  getMenus() async {
     connectionStatus.getNormalStatus();
     List<Menu> meals = [];
     var querySnapshot = await database.getData('menus');
+    if (querySnapshot.docs.isEmpty) return [];
+    for (var element in querySnapshot.docs) {
+      Menu meal = Menu.fromJson(
+        (element.data() as Map<String, dynamic>),
+      );
+
+      meal.id = element.id;
+      meals.add(meal);
+    }
+    return meals;
+  }
+
+  getMenuById(String menuId) async {
+    connectionStatus.getNormalStatus();
+    List<Menu> meals = [];
+    var querySnapshot = await database.getDataById(menuId, 'menus');
     if (querySnapshot.docs.isEmpty) return [];
     for (var element in querySnapshot.docs) {
       Menu meal = Menu.fromJson(
