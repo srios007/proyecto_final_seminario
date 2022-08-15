@@ -7,7 +7,7 @@ class User {
   ContactInfo? contactInfo;
   String? userType;
   String? password;
-  BankAccount? bankAccount;
+  CreditCard? creditCard;
   Address? address;
 
   User({
@@ -17,7 +17,7 @@ class User {
     this.contactInfo,
     this.userType,
     this.password,
-    this.bankAccount,
+    this.creditCard,
     this.address,
   });
 
@@ -34,9 +34,9 @@ class User {
             json['addresses'],
           )
         : null;
-    bankAccount = json['bankAccount'] != null
-        ? BankAccount.fromJson(
-            json['bankAccount'],
+    creditCard = json['creditCard'] != null
+        ? CreditCard.fromJson(
+            json['creditCard'],
           )
         : null;
   }
@@ -53,8 +53,8 @@ class User {
     if (address != null) {
       data['address'] = address?.toJson();
     }
-    if (bankAccount != null) {
-      data['bankAccount'] = bankAccount?.toJson();
+    if (creditCard != null) {
+      data['creditCard'] = creditCard?.toJson();
     }
     return data;
   }
@@ -145,53 +145,44 @@ class Contact {
   }
 }
 
-class BankAccount {
-  OwnerInfo? ownerInfo;
-  String? bank;
+class CreditCard {
+  String? cardNumber;
+  String? month;
+  String? year;
+  int? cvv;
   String? type;
-  String? number;
+  String? ownerName;
+  String? ownerDocumentId;
 
-  BankAccount({this.ownerInfo, this.bank, this.type, this.number});
+  CreditCard({
+    this.cardNumber,
+    this.month,
+    this.year,
+    this.cvv,
+    this.type,
+    this.ownerName,
+    this.ownerDocumentId,
+  });
 
-  BankAccount.fromJson(Map<String, dynamic> json) {
-    ownerInfo = json['ownerInfo'] != null
-        ? OwnerInfo?.fromJson(json['ownerInfo'])
-        : null;
-    bank = json['bank'];
+  CreditCard.fromJson(Map<String, dynamic> json) {
+    cardNumber = json['cardNumber'];
+    month = json['month'];
+    year = json['year'];
+    cvv = json['cvv'];
     type = json['type'];
-    number = json['number'];
+    ownerName = json['ownerName'];
+    ownerDocumentId = json['ownerDocumentId'];
   }
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    if (ownerInfo != null) {
-      data['ownerInfo'] = ownerInfo?.toJson();
-    }
-    data['bank'] = bank;
+    data['cardNumber'] = cardNumber;
+    data['month'] = month;
+    data['year'] = year;
+    data['cvv'] = cvv;
     data['type'] = type;
-    data['number'] = number;
-    return data;
-  }
-}
-
-class OwnerInfo {
-  String? name;
-  String? documentId;
-  String? typeId;
-
-  OwnerInfo({this.name, this.documentId, this.typeId});
-
-  OwnerInfo.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    documentId = json['documentId'];
-    typeId = json['typeId'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['name'] = name;
-    data['documentId'] = documentId;
-    data['typeId'] = typeId;
+    data['ownerName'] = ownerName;
+    data['ownerDocumentId'] = ownerDocumentId;
     return data;
   }
 }

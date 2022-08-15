@@ -1,8 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:proyecto_final_seminario/app/routes/app_pages.dart';
 import 'package:proyecto_final_seminario/app/widgets/widgets.dart';
-import '../../../utils/text_styles.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
+import '../../../../utils/utils.dart';
 import 'package:get/get.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -86,12 +87,60 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                     const SizedBox(height: 20),
                     Text(
-                      'Número de teléfono',
+                      'Número de celular',
                       style: styles.titleOffer,
                     ),
                     const SizedBox(height: 5),
                     Text(
                       '${controller.homeController.user.contactInfo!.phoneNumber!.dialingCode!} ${controller.homeController.user.contactInfo!.phoneNumber!.basePhoneNumber!}',
+                      style: styles.profileLabelStyle,
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Dirección',
+                          style: styles.titleOffer,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(Routes.ADD_ADDRESS);
+                          },
+                          child: Text(
+                            'Editar',
+                            style: styles.editProfile,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      '${controller.homeController.user.address ?? 'Sin dirección'}',
+                      style: styles.profileLabelStyle,
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Tarjeta de crédito',
+                          style: styles.titleOffer,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(Routes.ADD_CREDIT_CARD);
+                          },
+                          child: Text(
+                            'Editar',
+                            style: styles.editProfile,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      controller.homeController.user.creditCard!.cardNumber ?? 'Sin tarjeta',
                       style: styles.profileLabelStyle,
                     ),
                   ],

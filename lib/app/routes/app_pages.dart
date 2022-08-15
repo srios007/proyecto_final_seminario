@@ -12,8 +12,12 @@ import '../modules/onboarding/login/bindings/login_binding.dart';
 import '../modules/onboarding/login/views/login_view.dart';
 import '../modules/onboarding/register/bindings/register_binding.dart';
 import '../modules/onboarding/register/views/register_view.dart';
-import '../modules/profile/bindings/profile_binding.dart';
-import '../modules/profile/views/profile_view.dart';
+import '../modules/profile/add_address/bindings/add_address_binding.dart';
+import '../modules/profile/add_address/views/add_address_view.dart';
+import '../modules/profile/add_creditCard/bindings/add_credit_card_binding.dart';
+import '../modules/profile/add_creditCard/views/add_credit_card_view.dart';
+import '../modules/profile/profile/bindings/profile_binding.dart';
+import '../modules/profile/profile/views/profile_view.dart';
 import '../modules/request/category_detail/bindings/category_detail_binding.dart';
 import '../modules/request/category_detail/views/category_detail_view.dart';
 import '../modules/tour/bindings/tour_binding.dart';
@@ -71,6 +75,16 @@ class AppPages {
       name: _Paths.MEAL_DETAIL,
       page: () => const MealDetailView(),
       binding: MealDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD_ADDRESS,
+      page: () => const AddAddressView(),
+      binding: AddAddressBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD_CREDIT_CARD,
+      page: () => const AddCreditCardView(),
+      binding: AddCreditCardBinding(),
     ),
   ];
 }

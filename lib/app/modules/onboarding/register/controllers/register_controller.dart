@@ -1,18 +1,13 @@
-
-
 import 'package:proyecto_final_seminario/app/services/services.dart';
 import 'package:proyecto_final_seminario/app/models/models.dart';
 import 'package:permission_handler/permission_handler.dart';
- import 'package:image_picker/image_picker.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../../../widgets/snackbars.dart';
 import '../../../../routes/app_pages.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'dart:io';
-
-
-
 
 class RegisterController extends GetxController {
   final TextEditingController userNameController = TextEditingController();
@@ -109,7 +104,7 @@ class RegisterController extends GetxController {
       phoneNumber.basePhoneNumber = phoneController.text.trim();
       contactInfo.phoneNumber = phoneNumber;
       user.contactInfo = contactInfo;
-      user.bankAccount = BankAccount(ownerInfo: OwnerInfo());
+      user.creditCard = CreditCard();
       user.address = Address();
       user.userType = 'Client';
       try {
