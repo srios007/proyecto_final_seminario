@@ -1,12 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import '../controllers/menu_detail_controller.dart';
+import '../../../../models/models.dart';
 import 'package:flutter/material.dart';
-
+import '../../../../utils/utils.dart';
 import 'package:get/get.dart';
 
-import '../../../models/meal_model.dart';
-import '../../../utils/palette.dart';
-import '../../../utils/utils.dart';
-import '../controllers/menu_detail_controller.dart';
+ 
 
 class MenuDetailView extends GetView<MenuDetailController> {
   const MenuDetailView({Key? key}) : super(key: key);

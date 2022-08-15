@@ -1,9 +1,7 @@
+import '../../../../services/model_services/meal_service.dart';
+import '../../../../models/models.dart';
 import 'package:get/get.dart';
 
-import '../../../models/category_model.dart';
-import '../../../models/meal_model.dart';
-import '../../../models/menu_model.dart';
-import '../../../services/model_services/meal_service.dart';
 
 class MenuDetailController extends GetxController {
   late Menu menu;
