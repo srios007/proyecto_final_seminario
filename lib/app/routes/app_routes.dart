@@ -15,6 +15,7 @@ abstract class Routes {
   static const ADD_ADDRESS = _Paths.ADD_ADDRESS;
   static const ADD_CREDIT_CARD = _Paths.ADD_CREDIT_CARD;
   static const MENU_DETAIL = _Paths.MENU_DETAIL;
+  static const SHOPPING_CART = _Paths.SHOPPING_CART;
 }
 
 abstract class _Paths {
@@ -31,4 +32,5 @@ abstract class _Paths {
   static const ADD_ADDRESS = '/add-address';
   static const ADD_CREDIT_CARD = '/add-credit-card';
   static const MENU_DETAIL = '/menu-detail';
+  static const SHOPPING_CART = '/shopping-cart';
 }

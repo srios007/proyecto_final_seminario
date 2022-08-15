@@ -1,31 +1,25 @@
-import 'package:get/get.dart';
-
+import 'package:proyecto_final_seminario/app/models/models.dart';
 
 class CartItem {
-  DateTime? initDate;
-  DateTime? endDate;
-
+  Meal? meal;
+  DateTime? created;
+  Prices? price;
 
   CartItem({
-    this.initDate,
-    this.endDate,
+    this.meal,
+    this.created,
+    this.price,
   });
 }
 
 class Prices {
   double price = 0;
-  double comission = 0;
   double deliveryCost = 0;
   double total = 0;
-  double taxes = 0;
-  double insurance = 0;
 
   Prices({
     required this.price,
-    required this.comission,
     required this.deliveryCost,
     required this.total,
-    required this.taxes,
-    required this.insurance,
   });
 }

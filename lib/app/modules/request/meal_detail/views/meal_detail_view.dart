@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:proyecto_final_seminario/app/widgets/purple_button.dart';
 
 import '../../../../utils/utils.dart';
 import '../controllers/meal_detail_controller.dart';
@@ -108,6 +109,17 @@ class MealDetailView extends GetView<MealDetailController> {
                             '${controller.meal.amount}',
                             style: styles.profileLabelStyle,
                           ),
+                          const SizedBox(height: 20),
+                          const Spacer(),
+                          Align(
+                            alignment: Alignment.center,
+                            child: PurpleButton(
+                              buttonText: 'Agregar al carrito',
+                              isLoading: false.obs,
+                              onPressed: controller.addToCart,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
                         ],
                       ),
                     );

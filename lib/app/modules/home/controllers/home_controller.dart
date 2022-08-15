@@ -1,21 +1,20 @@
 import 'package:proyecto_final_seminario/app/services/model_services/category_service.dart';
 import 'package:proyecto_final_seminario/app/services/model_services/meal_service.dart';
 import 'package:proyecto_final_seminario/app/models/category_model.dart';
-import 'package:proyecto_final_seminario/app/models/meal_model.dart';
 import 'package:proyecto_final_seminario/app/services/services.dart';
-import 'package:proyecto_final_seminario/app/models/user_model.dart';
 import 'package:proyecto_final_seminario/app/routes/app_pages.dart';
+import 'package:proyecto_final_seminario/app/models/models.dart';
 import '../../../services/model_services/menu_service.dart';
-import '../../../models/menu_model.dart';
 import 'package:get/get.dart';
 
-
 class HomeController extends GetxController {
-  User user = User();
+  RxList shoppingCart = [].obs;
   List<Category> categories = [];
+  RxBool isLoading = false.obs;
   List<Meal> meals = [];
   List<Menu> menus = [];
-  RxBool isLoading = false.obs;
+  User user = User();
+
   @override
   void onInit() {
     getData();

@@ -22,6 +22,8 @@ import '../modules/request/meal_detail/bindings/meal_detail_binding.dart';
 import '../modules/request/meal_detail/views/meal_detail_view.dart';
 import '../modules/request/menu_detail/bindings/menu_detail_binding.dart';
 import '../modules/request/menu_detail/views/menu_detail_view.dart';
+import '../modules/shopping_cart/bindings/shopping_cart_binding.dart';
+import '../modules/shopping_cart/views/shopping_cart_view.dart';
 import '../modules/tour/bindings/tour_binding.dart';
 import '../modules/tour/views/tour_view.dart';
 
@@ -92,6 +94,11 @@ class AppPages {
       name: _Paths.MENU_DETAIL,
       page: () => const MenuDetailView(),
       binding: MenuDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.SHOPPING_CART,
+      page: () => const ShoppingCartView(),
+      binding: ShoppingCartBinding(),
     ),
   ];
 }

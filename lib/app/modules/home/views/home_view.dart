@@ -1,15 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
 import 'package:proyecto_final_seminario/app/models/meal_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:proyecto_final_seminario/app/utils/utils.dart';
-
+import '../controllers/home_controller.dart';
 import '../../../models/menu_model.dart';
 import '../../../routes/app_pages.dart';
-import '../../../widgets/purple_button.dart';
-import '../controllers/home_controller.dart';
+import 'package:flutter/material.dart';
 import '../widgets/custom_drawer.dart';
+import 'package:get/get.dart';
 
 class HomeView extends GetView<HomeController> {
   @override
@@ -18,6 +15,20 @@ class HomeView extends GetView<HomeController> {
       appBar: AppBar(
         title: const Text('Home'),
         centerTitle: true,
+        actions: [
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(Routes.SHOPPING_CART);
+            },
+            child: const Padding(
+              padding: EdgeInsets.only(right: 10),
+              child: Icon(
+                Icons.shopping_cart,
+                color: Palette.white,
+              ),
+            ),
+          )
+        ],
       ),
       drawer: CustomDrawer(
         contextGlobal: context,
@@ -149,7 +160,6 @@ class HomeView extends GetView<HomeController> {
                                 ),
                               ),
                         const SizedBox(height: 30),
-
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Text(
@@ -188,19 +198,6 @@ class HomeView extends GetView<HomeController> {
                         ),
                         const SizedBox(height: 30),
                         const Spacer(),
-                        // Padding(
-                        //   padding: const EdgeInsets.symmetric(
-                        //     horizontal: 40,
-                        //     vertical: 30,
-                        //   ),
-                        //   child: PurpleButton(
-                        //     height: 40,
-                        //     width: Get.width - 80,
-                        //     isLoading: false.obs,
-                        //     onPressed: controller.goToAddMenu,
-                        //     buttonText: 'Agregar menú',
-                        //   ),
-                        // ),
                       ],
                     ),
                   )

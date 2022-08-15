@@ -1,11 +1,15 @@
 import 'package:get/get.dart';
 import 'package:proyecto_final_seminario/app/models/restaurant_model.dart';
+import 'package:proyecto_final_seminario/app/modules/home/controllers/home_controller.dart';
 import 'package:proyecto_final_seminario/app/services/model_services/menu_service.dart';
 import 'package:proyecto_final_seminario/app/services/model_services/restaurant_service.dart';
+import 'package:proyecto_final_seminario/app/widgets/snackbars.dart';
 
 import '../../../../models/models.dart';
+import '../../../../routes/app_pages.dart';
 
 class MealDetailController extends GetxController {
+  HomeController homeController = Get.find();
   RxBool isLoading = false.obs;
   late Restaurant restaurant;
   late Meal meal;
@@ -36,6 +40,24 @@ class MealDetailController extends GetxController {
   getRestaurant() async {
     restaurant =
         (await restaurantService.getUserDocumentById(meal.restaurantId!))!;
+  }
+
+  /// Agrega un platillo al carrito
+  addToCart() {
+    Prices price = Prices(
+      price: meal.price!,
+      deliveryCost: 5000,
+      total: meal.price! + 5000,
+    );
+    homeController.shoppingCart.add(
+      CartItem(
+        meal: meal,
+        created: DateTime.now(),
+        price: price,
+      ),
+    );
+    SnackBars.showSuccessSnackBar('Platillo agregado al carrito con éxito');
+    Get.offNamedUntil('/home', (route) => route.settings.name == Routes.HOME);
   }
 
   /// Categoría a partir de un category id
