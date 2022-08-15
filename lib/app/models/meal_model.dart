@@ -1,10 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'dart:io';
 
 class Meal {
   String? id;
+  String? menuId;
   DateTime? created;
   String? restaurantId;
   String? categoryId;
@@ -24,6 +24,7 @@ class Meal {
 
   Meal({
     this.id,
+    this.menuId,
     this.created,
     this.restaurantId,
     this.categoryId,
@@ -43,6 +44,7 @@ class Meal {
 
   Meal.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    menuId = json['menuId'];
     created = json['created'].toDate();
     restaurantId = json['restaurantId'];
     categoryId = json['categoyId'];
@@ -57,6 +59,7 @@ class Meal {
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['id'] = id;
+    data['menuId'] = menuId;
     data['created'] = created;
     data['restaurantId'] = restaurantId;
     data['categoyId'] = categoryId;

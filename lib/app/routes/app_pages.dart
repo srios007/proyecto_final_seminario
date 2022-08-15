@@ -4,6 +4,8 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/meal_detail/bindings/meal_detail_binding.dart';
 import '../modules/meal_detail/views/meal_detail_view.dart';
+import '../modules/menu_detail/bindings/menu_detail_binding.dart';
+import '../modules/menu_detail/views/menu_detail_view.dart';
 import '../modules/onboarding/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/onboarding/forgot_password/views/forgot_password_view.dart';
 import '../modules/onboarding/forgot_user/bindings/forgot_user_binding.dart';
@@ -85,6 +87,11 @@ class AppPages {
       name: _Paths.ADD_CREDIT_CARD,
       page: () => const AddCreditCardView(),
       binding: AddCreditCardBinding(),
+    ),
+    GetPage(
+      name: _Paths.MENU_DETAIL,
+      page: () => const MenuDetailView(),
+      binding: MenuDetailBinding(),
     ),
   ];
 }

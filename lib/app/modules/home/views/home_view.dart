@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:proyecto_final_seminario/app/models/meal_model.dart';
 import 'package:proyecto_final_seminario/app/utils/utils.dart';
 
+import '../../../models/menu_model.dart';
 import '../../../widgets/purple_button.dart';
 import '../controllers/home_controller.dart';
 import '../widgets/custom_drawer.dart';
@@ -72,7 +73,8 @@ class HomeView extends GetView<HomeController> {
                             itemCount: controller.categories.length,
                             itemBuilder: (context, index) => GestureDetector(
                               onTap: () async {
-                               await controller.goToCategoryDetail(controller.categories[index]);
+                                await controller.goToCategoryDetail(
+                                    controller.categories[index]);
                               },
                               child: Container(
                                 margin: const EdgeInsets.all(10),
@@ -107,6 +109,45 @@ class HomeView extends GetView<HomeController> {
                           ),
                         ),
                         const SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Text(
+                            'Mis menús',
+                            style: styles.titleOffer,
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                        controller.menus.isEmpty
+                            ? Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Text(
+                                  'No tienes menús aún',
+                                  style: styles.purpleboldStyle,
+                                ),
+                              )
+                            : Container(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                width: Get.width,
+                                height: 70,
+                                child: ListView.builder(
+                                  physics: const ClampingScrollPhysics(),
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: controller.menus.length,
+                                  itemBuilder: (context, index) {
+                                    var menu = controller.menus[index];
+                                    return MenuContainer(
+                                      onTap: () {
+                                        controller.goToMenu(menu);
+                                      },
+                                      menu: menu,
+                                      controller: controller,
+                                    );
+                                  },
+                                ),
+                              ),
+                        const SizedBox(height: 30),
 
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -260,6 +301,61 @@ class MealContainer extends StatelessWidget {
           ),
           const SizedBox(height: 20),
         ],
+      ),
+    );
+  }
+}
+class MenuContainer extends StatelessWidget {
+  MenuContainer({
+    Key? key,
+    required this.menu,
+    required this.controller,
+    required this.onTap,
+  }) : super(key: key);
+
+  final Menu menu;
+  HomeController controller;
+  void Function() onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        height: 100,
+        width: 170,
+        decoration: ShapeDecoration.fromBoxDecoration(
+          BoxDecoration(
+            color: Palette.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: const [
+              BoxShadow(
+                color: Color.fromARGB(255, 209, 208, 208),
+                offset: Offset(4.0, 4.0),
+                blurRadius: 8.0,
+              ),
+            ],
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              child: Text(
+                '${menu.name}',
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: Palette.purple,
+                ),
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -7,10 +7,14 @@ import 'package:proyecto_final_seminario/app/services/services.dart';
 import 'package:proyecto_final_seminario/app/models/user_model.dart';
 import 'package:get/get.dart';
 
+import '../../../models/menu_model.dart';
+import '../../../services/model_services/menu_service.dart';
+
 class HomeController extends GetxController {
   User user = User();
   List<Category> categories = [];
   List<Meal> meals = [];
+  List<Menu> menus = [];
   RxBool isLoading = false.obs;
   @override
   void onInit() {
@@ -23,6 +27,7 @@ class HomeController extends GetxController {
     await getRestaurant();
     await getCategories();
     await getMeals();
+    await getMenus();
     isLoading.value = false;
   }
 
@@ -45,6 +50,18 @@ class HomeController extends GetxController {
   goToCategoryDetail(Category category) async {
     Get.toNamed(Routes.CATEGORY_DETAIL, arguments: {
       'category': category,
+    });
+  }
+
+  /// Trae los menús del restaurante
+  getMenus() async {
+    menus = await menuService.getMenus();
+  }
+
+  /// Ir a detalle de  menú
+  goToMenu(Menu menu) async {
+    await Get.toNamed(Routes.MENU_DETAIL, arguments: {
+      'menu': menu,
     });
   }
 

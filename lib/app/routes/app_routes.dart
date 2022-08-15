@@ -14,6 +14,7 @@ abstract class Routes {
   static const MEAL_DETAIL = _Paths.MEAL_DETAIL;
   static const ADD_ADDRESS = _Paths.ADD_ADDRESS;
   static const ADD_CREDIT_CARD = _Paths.ADD_CREDIT_CARD;
+  static const MENU_DETAIL = _Paths.MENU_DETAIL;
 }
 
 abstract class _Paths {
@@ -29,4 +30,5 @@ abstract class _Paths {
   static const MEAL_DETAIL = '/meal-detail';
   static const ADD_ADDRESS = '/add-address';
   static const ADD_CREDIT_CARD = '/add-credit-card';
+  static const MENU_DETAIL = '/menu-detail';
 }
