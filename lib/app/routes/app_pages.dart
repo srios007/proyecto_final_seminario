@@ -78,7 +78,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ADD_ADDRESS,
-      page: () => const AddAddressView(),
+      page: () => AddAddressView(),
       binding: AddAddressBinding(),
     ),
     GetPage(

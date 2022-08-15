@@ -44,10 +44,14 @@ dependencies:
   enum_to_string: ^2.0.1
   flutter_image_compress: ^1.1.0
   intl_phone_field: ^3.1.0
-  google_maps_flutter: ^2.1.8
   location: ^4.2.0
   dots_indicator: ^2.1.0
   country_code_picker: ^2.0.2
+  google_maps_flutter:
+    git:
+      url: https://github.com/lukaskurz/plugins
+      path: packages/google_maps_flutter/google_maps_flutter
+      ref: main
 
 dev_dependencies:
   flutter_lints: ^2.0.1

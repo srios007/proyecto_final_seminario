@@ -7,9 +7,12 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
+       
         android:label="Cliente"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyCY097xNscThiYZKBkmr2ojzUBT25Iv17Q"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
