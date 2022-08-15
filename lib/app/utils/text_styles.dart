@@ -5,6 +5,7 @@ import 'package:proyecto_final_seminario/app/utils/utils.dart';
 final currencyFormat = NumberFormat.currency(symbol: "\$", decimalDigits: 0);
 final requestFormat =
     NumberFormat.currency(symbol: "", decimalDigits: 0, locale: "es_ES");
+
 class Styles {
   TextStyle tittleRegister = const TextStyle(
     color: Palette.darkBlue,
@@ -86,7 +87,8 @@ class Styles {
     fontSize: 24,
     color: Palette.darkBlue,
   );
-    TextStyle editProfile = const TextStyle(
+
+  TextStyle editProfile = const TextStyle(
     fontWeight: FontWeight.w700,
     fontSize: 18,
     color: Palette.lightBlue,

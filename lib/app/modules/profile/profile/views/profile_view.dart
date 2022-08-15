@@ -125,8 +125,11 @@ class ProfileView extends GetView<ProfileController> {
                             ),
                             const SizedBox(height: 5),
                             Text(
-                              controller.homeController.user.address!.address ??
-                                  'Sin dirección',
+                              controller.homeController.user.address == null
+                                  ? 'Sin dirección'
+                                  : controller.homeController.user.address!
+                                          .address ??
+                                      'Sin dirección',
                               style: styles.profileLabelStyle,
                             ),
                             const SizedBox(height: 20),
