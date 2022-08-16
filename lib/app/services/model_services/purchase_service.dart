@@ -1,40 +1,39 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:proyecto_final_seminario/app/models/purchase_model.dart';
 import '../../models/meal_model.dart';
 import '../../utils/connectivity.dart';
 import '../../utils/references.dart';
 import '../firebase_services/database_service.dart';
 
-class MealService {
+class PurchaseService {
   static String restaurantsReference = firebaseReferences.restaurants;
   static String addressReference = firebaseReferences.addresses;
   static String mealReference = firebaseReferences.meals;
 
-  static final MealService _instance = MealService._internal();
+  static final PurchaseService _instance = PurchaseService._internal();
 
-  factory MealService() {
+  factory PurchaseService() {
     return _instance;
   }
 
-  MealService._internal();
+  PurchaseService._internal();
   var firestore = FirebaseFirestore.instance;
 
-  createMealAndIngrediens({
-    required Meal meal,
-    required restaurantId,
+  createPurchase({
+    required Purchase purchase,
   }) async {
     try {
-      meal.created = DateTime.now();
-      meal.restaurantId = restaurantId;
-      meal.isAvaliable = true;
-      DocumentReference documentReference = await FirebaseFirestore.instance
-          .collection('meals')
-          .add(meal.toJson());
+      purchase.created = DateTime.now();
 
-      database.saveMealAndIngredients(
-        collection: 'meals',
+      DocumentReference documentReference = await FirebaseFirestore.instance
+          .collection('purchases')
+          .add(purchase.toJson());
+
+      database.savePurchase(
+        collection: 'purchases',
         customId: documentReference.id,
-        meal: meal,
+        purchase: purchase,
       );
 
       return true;
@@ -84,4 +83,4 @@ class MealService {
   }
 }
 
-MealService mealService = MealService();
+PurchaseService purchaseService = PurchaseService();

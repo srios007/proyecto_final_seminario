@@ -4,7 +4,6 @@ import 'package:proyecto_final_seminario/app/utils/utils.dart';
 import 'package:proyecto_final_seminario/app/widgets/purple_button.dart';
 import '../controllers/shopping_cart_controller.dart';
 import '../../home/controllers/home_controller.dart';
-import '../../../models/meal_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,9 +18,11 @@ class ShoppingCartView extends GetView<ShoppingCartController> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: PurpleButton(
-        buttonText: 'Pagar',
-        isLoading: false.obs,
-        onPressed: () {},
+        buttonText: 'Pagar ${currencyFormat.format(
+              controller.total,
+            ).replaceAll(',', '.')} ',
+        isLoading: controller.isLoading,
+        onPressed: controller.pay,
       ),
       body: CustomScrollView(
         physics: const ClampingScrollPhysics(),
@@ -149,6 +150,19 @@ class MealContainer extends StatelessWidget {
                     'Precio: ${currencyFormat.format(
                           meal.price,
                         ).replaceAll(',', '.')}',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: Palette.purple,
+                    ),
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    'Precio del envío: ${cartItem.price!.deliveryCost.toInt()}',
                     style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,

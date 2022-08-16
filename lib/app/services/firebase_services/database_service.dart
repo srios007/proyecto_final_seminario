@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:proyecto_final_seminario/app/models/models.dart';
 
 import '../../models/meal_model.dart';
 import '../../utils/references.dart';
@@ -647,8 +648,7 @@ class Database {
     }
   }
 
-  /// Crea una oferta en Firebase correspondiente a un PRODUCTO
-  Future<bool> saveMealanIngredients(
+  Future<bool> saveMealAndIngredients(
       {required Meal meal,
       required String collection,
       required String customId}) async {
@@ -671,6 +671,28 @@ class Database {
         await ingredientReference
             .set({...meal.toJson(), 'id': ingredientReference.id});
       }
+
+      return true;
+    } on Exception catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  Future<bool> savePurchase(
+      {required Purchase purchase,
+      required String collection,
+      required String customId}) async {
+    try {
+      CollectionReference collRef = firestore.collection(collection);
+      DocumentReference docReferance = collRef.doc(customId);
+
+      await firestore
+          .collection(collection)
+          .doc(docReferance.id)
+          .set({...purchase.toJson(), 'id': docReferance.id});
+
+    
 
       return true;
     } on Exception catch (e) {

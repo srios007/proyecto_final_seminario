@@ -4,3 +4,4 @@ export 'constants_model.dart';
 export 'cart_item_model.dart';
 export 'meal_model.dart';
 export 'menu_model.dart';
+export 'purchase_model.dart';

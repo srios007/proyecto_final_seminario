@@ -22,4 +22,20 @@ class Prices {
     required this.deliveryCost,
     required this.total,
   });
+
+    Prices.fromJson(Map<String, dynamic> json) {
+    price = json['price'];
+    deliveryCost = json['deliveryCost'] ;
+    total = json['total'];
+ 
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['price'] = price;
+    data['deliveryCost'] = deliveryCost;
+    data['total'] = total;
+ 
+    return data;
+  }
 }
