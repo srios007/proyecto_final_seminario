@@ -262,8 +262,6 @@ class Database {
   /// Obtiene el stream de una subcoleccion pero ordenada con una condicion
   Stream<QuerySnapshot> getOrderedSubcollectionSnapshotWithCondition({
     required String collection,
-    required String subcollection,
-    required String userId,
     required String orderProperty,
     required String whereProperty,
     required dynamic equal,
@@ -272,8 +270,6 @@ class Database {
   }) {
     return firestore
         .collection(collection)
-        .doc(userId)
-        .collection(subcollection)
         .where(whereProperty, isEqualTo: equal)
         .limit(limit)
         .orderBy(orderProperty, descending: desc)
@@ -691,8 +687,6 @@ class Database {
           .collection(collection)
           .doc(docReferance.id)
           .set({...purchase.toJson(), 'id': docReferance.id});
-
-    
 
       return true;
     } on Exception catch (e) {

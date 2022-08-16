@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:proyecto_final_seminario/app/models/purchase_model.dart';
+import 'package:proyecto_final_seminario/app/services/model_services/meal_service.dart';
+import 'package:proyecto_final_seminario/app/services/model_services/restaurant_service.dart';
 import '../../models/meal_model.dart';
 import '../../utils/connectivity.dart';
 import '../../utils/references.dart';
@@ -43,25 +45,30 @@ class PurchaseService {
     }
   }
 
-  Future<List<Meal>> getMealsByDocumentId(
+  getPurchasesByUserId(
     String documentId,
-    String collection,
-    String param,
   ) async {
     connectionStatus.getNormalStatus();
-    List<Meal> meals = [];
+    List<Purchase> purchases = [];
     var querySnapshot =
-        await database.getDataByCustonParam(documentId, collection, param);
+        await database.getDataByCustonParam(documentId, 'purchases', 'userId');
     if (querySnapshot.docs.isEmpty) return [];
     for (var element in querySnapshot.docs) {
-      Meal meal = Meal.fromJson(
+      Purchase purchase = Purchase.fromJson(
         (element.data() as Map<String, dynamic>),
       );
-      meal.ingredients = [].obs;
-      meal.id = element.id;
-      meals.add(meal);
+
+      purchase.id = element.id;
+      purchases.add(purchase);
+      for (var element in purchases) {
+        element.restaurant =
+            await restaurantService.getUserDocumentById(element.restaurantId!);
+        List<Meal> aux = await mealService.getMealsByDocumentId(
+            element.mealId!, 'meals', 'id');
+        element.meal = aux[0];
+      }
     }
-    return meals;
+    return purchases;
   }
 
   Future<List<Meal>> getMeals(

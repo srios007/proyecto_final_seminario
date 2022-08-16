@@ -26,7 +26,7 @@ class ShoppingCartController extends GetxController {
   pay() async {
     isLoading.value = true;
     State state = State(
-      isPreparing: false,
+      isPreparing: true,
       isInRoute: false,
       isDelivered: false,
     );
@@ -34,8 +34,8 @@ class ShoppingCartController extends GetxController {
       purchases.add(
         Purchase(
             created: DateTime.now(),
-            restaurantId: element.meal.restaurantId,
-            mealId: element.meal.id,
+            restaurantId: element.purchase.restaurantId,
+            mealId: element.purchase.id,
             prices: element.price,
             userId: homeController.user.id,
             state: state),

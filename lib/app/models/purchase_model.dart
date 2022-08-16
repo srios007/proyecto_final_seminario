@@ -1,4 +1,5 @@
-import 'package:proyecto_final_seminario/app/models/cart_item_model.dart';
+import 'package:proyecto_final_seminario/app/models/models.dart';
+import 'package:proyecto_final_seminario/app/models/restaurant_model.dart';
 
 class Purchase {
   String? id;
@@ -8,6 +9,9 @@ class Purchase {
   String? mealId;
   Prices? prices;
   State? state;
+  Meal? meal;
+  User? user;
+  Restaurant? restaurant;
 
   Purchase({
     this.id,
@@ -17,6 +21,9 @@ class Purchase {
     this.mealId,
     this.prices,
     this.state,
+    this.meal,
+    this.user,
+    this.restaurant,
   });
 
   Purchase.fromJson(Map<String, dynamic> json) {

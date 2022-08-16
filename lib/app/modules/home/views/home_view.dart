@@ -1,6 +1,7 @@
 import 'package:proyecto_final_seminario/app/models/meal_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:proyecto_final_seminario/app/utils/utils.dart';
+import '../../../models/purchase_model.dart';
 import '../controllers/home_controller.dart';
 import '../../../models/menu_model.dart';
 import '../../../routes/app_pages.dart';
@@ -168,32 +169,43 @@ class HomeView extends GetView<HomeController> {
                           ),
                         ),
                         const SizedBox(height: 15),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          width: Get.width,
-                          height: 250,
-                          child: ListView.builder(
-                            physics: const ClampingScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            itemCount: controller.meals.length,
-                            itemBuilder: (context, index) {
-                              var meal = controller.meals[index];
-                              return MealContainer(
-                                onTap: () {
-                                  Get.toNamed(Routes.MEAL_DETAIL, arguments: {
-                                    'meal': meal,
-                                  });
-                                },
-                                meal: meal,
-                                controller: controller,
-                              );
-                            },
-                          ),
-                        ),
+                        controller.meals.isEmpty
+                            ? Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Text(
+                                  'No tienes platillos aún',
+                                  style: styles.purpleboldStyle,
+                                ),
+                              )
+                            : Container(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                width: Get.width,
+                                height: 250,
+                                child: ListView.builder(
+                                  physics: const ClampingScrollPhysics(),
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: controller.meals.length,
+                                  itemBuilder: (context, index) {
+                                    var meal = controller.meals[index];
+                                    return MealContainer(
+                                      onTap: () {
+                                        Get.toNamed(Routes.MEAL_DETAIL,
+                                            arguments: {
+                                              'meal': meal,
+                                            });
+                                      },
+                                      meal: meal,
+                                      controller: controller,
+                                    );
+                                  },
+                                ),
+                              ),
                         const SizedBox(height: 15),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Text('Mis órdenes activas',
+                          child: Text('Mis órdenes',
                               style: styles.titleOffer),
                         ),
                         const SizedBox(height: 15),
@@ -202,11 +214,34 @@ class HomeView extends GetView<HomeController> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 20),
                                 child: Text(
-                                  'No tienes órdenes activas aún',
+                                  'No tienes órdenes aún',
                                   style: styles.purpleboldStyle,
                                 ),
                               )
-                            : Container(),
+                            : Container(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                width: Get.width,
+                                height: 250,
+                                child: ListView.builder(
+                                  physics: const ClampingScrollPhysics(),
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: controller.purchases.length,
+                                  itemBuilder: (context, index) {
+                                    var purchase = controller.purchases[index];
+                                    return PurchaseContainer(
+                                      onTap: () {
+                                        // Get.toNamed(Routes.MEAL_DETAIL,
+                                        //     arguments: {
+                                        //       'meal': meal,
+                                        //     });
+                                      },
+                                      purchase: purchase,
+                                      controller: controller,
+                                    );
+                                  },
+                                ),
+                              ),
                         const SizedBox(height: 30),
                         const Spacer(),
                       ],
@@ -374,6 +409,112 @@ class MenuContainer extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class PurchaseContainer extends StatelessWidget {
+  PurchaseContainer({
+    Key? key,
+    required this.purchase,
+    required this.controller,
+    required this.onTap,
+  }) : super(key: key);
+
+  final Purchase purchase;
+  HomeController controller;
+  void Function() onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        height: 100,
+        width: 170,
+        decoration: ShapeDecoration.fromBoxDecoration(
+          BoxDecoration(
+            color: Palette.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: const [
+              BoxShadow(
+                color: Color.fromARGB(255, 209, 208, 208),
+                offset: Offset(4.0, 4.0),
+                blurRadius: 8.0,
+              ),
+            ],
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(height: 20),
+            SizedBox(
+              height: 130,
+              width: 130,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: CachedNetworkImage(
+                  fit: BoxFit.fill,
+                  imageUrl: purchase.meal!.pictureUrl!,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: CircularProgressIndicator(
+                      value: downloadProgress.progress,
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              child: Text(
+                '${purchase.meal!.name}',
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: Palette.purple,
+                ),
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              child: Text(
+                'Estado: ${controller.setState(purchase.state!)}',
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: Palette.purple,
+                ),
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              child: Text(
+                'Total: ${currencyFormat.format(
+                      purchase.prices!.total,
+                    ).replaceAll(',', '.')}',
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: Palette.purple,
+                ),
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
