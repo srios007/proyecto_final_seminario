@@ -39,8 +39,7 @@ class ShoppingCartView extends GetView<ShoppingCartController> {
                           : 0,
                     ),
                     child: MealContainer(
-                      meal: controller
-                          .homeController.shoppingCart[index].purchase,
+                      meal: controller.homeController.shoppingCart[index].meal,
                       homeController: controller.homeController,
                       cartItem: controller.homeController.shoppingCart[index],
                       controller: controller,

@@ -34,8 +34,8 @@ class ShoppingCartController extends GetxController {
       purchases.add(
         Purchase(
             created: DateTime.now(),
-            restaurantId: element.purchase.restaurantId,
-            mealId: element.purchase.id,
+            restaurantId: element.meal.restaurantId,
+            mealId: element.meal.id,
             prices: element.price,
             userId: homeController.user.id,
             state: state),
