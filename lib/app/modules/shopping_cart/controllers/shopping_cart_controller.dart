@@ -25,15 +25,20 @@ class ShoppingCartController extends GetxController {
   /// Crea los purchases
   pay() async {
     isLoading.value = true;
+    State state = State(
+      isPreparing: false,
+      isInRoute: false,
+      isDelivered: false,
+    );
     for (var element in homeController.shoppingCart) {
       purchases.add(
         Purchase(
-          created: DateTime.now(),
-          restaurantId: element.meal.restaurantId,
-          mealId: element.meal.id,
-          prices: element.price,
-          userId: homeController.user.id,
-        ),
+            created: DateTime.now(),
+            restaurantId: element.meal.restaurantId,
+            mealId: element.meal.id,
+            prices: element.price,
+            userId: homeController.user.id,
+            state: state),
       );
     }
     for (var purchase in purchases) {

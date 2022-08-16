@@ -11,6 +11,7 @@ class HomeController extends GetxController {
   RxList shoppingCart = [].obs;
   List<Category> categories = [];
   RxBool isLoading = false.obs;
+  List<Meal> purchases = [];
   List<Meal> meals = [];
   List<Menu> menus = [];
   User user = User();
@@ -54,6 +55,11 @@ class HomeController extends GetxController {
 
   /// Trae los menús del restaurante
   getMenus() async {
+    menus = await menuService.getMenus();
+  }
+
+    /// Trae los purchases del usuario
+  getPurchase() async {
     menus = await menuService.getMenus();
   }
 

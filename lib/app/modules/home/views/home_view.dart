@@ -196,6 +196,17 @@ class HomeView extends GetView<HomeController> {
                           child: Text('Mis órdenes activas',
                               style: styles.titleOffer),
                         ),
+                        const SizedBox(height: 15),
+                        controller.purchases.isEmpty
+                            ? Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Text(
+                                  'No tienes órdenes activas aún',
+                                  style: styles.purpleboldStyle,
+                                ),
+                              )
+                            : Container(),
                         const SizedBox(height: 30),
                         const Spacer(),
                       ],
