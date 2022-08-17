@@ -86,10 +86,12 @@ class HomeController extends GetxController {
       limit: 100,
     )
         .listen((event) async {
+      isLoading.value = true;
+
       if (event.docs.isEmpty) {
         purchases = [];
+        isLoading.value = false;
       } else {
-        isLoading.value = true;
         purchases = [];
         for (var element in event.docs) {
           Purchase purchase =

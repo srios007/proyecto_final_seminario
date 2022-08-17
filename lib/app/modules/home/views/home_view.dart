@@ -18,8 +18,9 @@ class HomeView extends GetView<HomeController> {
         centerTitle: true,
         actions: [
           GestureDetector(
-            onTap: () {
-              Get.toNamed(Routes.SHOPPING_CART);
+            onTap: () async {
+              await Get.toNamed(Routes.SHOPPING_CART);
+              controller.getData();
             },
             child: const Padding(
               padding: EdgeInsets.only(right: 10),
@@ -205,8 +206,7 @@ class HomeView extends GetView<HomeController> {
                         const SizedBox(height: 15),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Text('Mis órdenes',
-                              style: styles.titleOffer),
+                          child: Text('Mis órdenes', style: styles.titleOffer),
                         ),
                         const SizedBox(height: 15),
                         controller.purchases.isEmpty
@@ -230,12 +230,6 @@ class HomeView extends GetView<HomeController> {
                                   itemBuilder: (context, index) {
                                     var purchase = controller.purchases[index];
                                     return PurchaseContainer(
-                                      onTap: () {
-                                        // Get.toNamed(Routes.MEAL_DETAIL,
-                                        //     arguments: {
-                                        //       'meal': meal,
-                                        //     });
-                                      },
                                       purchase: purchase,
                                       controller: controller,
                                     );
@@ -421,102 +415,97 @@ class PurchaseContainer extends StatelessWidget {
     Key? key,
     required this.purchase,
     required this.controller,
-    required this.onTap,
   }) : super(key: key);
 
   final Purchase purchase;
   HomeController controller;
-  void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        height: 100,
-        width: 170,
-        decoration: ShapeDecoration.fromBoxDecoration(
-          BoxDecoration(
-            color: Palette.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: const [
-              BoxShadow(
-                color: Color.fromARGB(255, 209, 208, 208),
-                offset: Offset(4.0, 4.0),
-                blurRadius: 8.0,
-              ),
-            ],
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const SizedBox(height: 20),
-            SizedBox(
-              height: 130,
-              width: 130,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: CachedNetworkImage(
-                  fit: BoxFit.fill,
-                  imageUrl: purchase.meal!.pictureUrl!,
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: CircularProgressIndicator(
-                      value: downloadProgress.progress,
-                    ),
-                  ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                ),
-              ),
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      height: 100,
+      width: 170,
+      decoration: ShapeDecoration.fromBoxDecoration(
+        BoxDecoration(
+          color: Palette.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: const [
+            BoxShadow(
+              color: Color.fromARGB(255, 209, 208, 208),
+              offset: Offset(4.0, 4.0),
+              blurRadius: 8.0,
             ),
-            const SizedBox(height: 10),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              child: Text(
-                '${purchase.meal!.name}',
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
-                  color: Palette.purple,
-                ),
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              child: Text(
-                'Estado: ${controller.setState(purchase.state!)}',
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
-                  color: Palette.purple,
-                ),
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              child: Text(
-                'Total: ${currencyFormat.format(
-                      purchase.prices!.total,
-                    ).replaceAll(',', '.')}',
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
-                  color: Palette.purple,
-                ),
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            const SizedBox(height: 20),
           ],
         ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const SizedBox(height: 20),
+          SizedBox(
+            height: 130,
+            width: 130,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: CachedNetworkImage(
+                fit: BoxFit.fill,
+                imageUrl: purchase.meal!.pictureUrl!,
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: CircularProgressIndicator(
+                    value: downloadProgress.progress,
+                  ),
+                ),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              '${purchase.meal!.name}',
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+                color: Palette.purple,
+              ),
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              'Estado: ${controller.setState(purchase.state!)}',
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+                color: Palette.purple,
+              ),
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              'Total: ${currencyFormat.format(
+                    purchase.prices!.total,
+                  ).replaceAll(',', '.')}',
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+                color: Palette.purple,
+              ),
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          const SizedBox(height: 20),
+        ],
       ),
     );
   }

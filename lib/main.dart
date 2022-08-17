@@ -7,7 +7,7 @@ import 'package:proyecto_final_seminario/app/utils/utils.dart';
 import 'app/routes/app_pages.dart';
 
 Future<void> main() async {
- WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   await Firebase.initializeApp();
   // await PushNotificationService.initNotifications();
@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
     if (firebaseUser != null) {
       return Routes.HOME;
     } else if (box.read("isTourShowed") ?? false) {
+      return Routes.TOUR;
       return Routes.LOGIN;
     } else {
       return Routes.TOUR;
