@@ -1,7 +1,5 @@
 import 'package:proyecto_final_seminario/app/services/model_services/category_service.dart';
 import 'package:proyecto_final_seminario/app/services/model_services/meal_service.dart';
-import 'package:proyecto_final_seminario/app/models/category_model.dart';
-import 'package:proyecto_final_seminario/app/services/model_services/purchase_service.dart';
 import 'package:proyecto_final_seminario/app/services/services.dart';
 import 'package:proyecto_final_seminario/app/routes/app_pages.dart';
 import 'package:proyecto_final_seminario/app/models/models.dart';
